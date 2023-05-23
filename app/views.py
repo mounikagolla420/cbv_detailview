@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView,ListView,DetailView
+from django.views.generic import TemplateView,ListView,DetailView,CreateView,UpdateView,DeleteView
 # Create your views here.
 from app.models import *
+from django.urls import reverse_lazy 
 
 
 class home(TemplateView):
@@ -14,3 +15,16 @@ class SchoolList(ListView):
 class SchoolDetail(DetailView):
     model=School
     context_object_name='sclobject'
+
+class SchoolCreate(CreateView):
+    model=School
+    fields='__all__'
+
+class SchoolUpdate(UpdateView):
+    model=School
+    fields='__all__'
+
+class Schooldelete(DeleteView):
+    model=School
+    context_object_name='schoolobject'
+    success_url=reverse_lazy('SchoolList')
